@@ -6,7 +6,7 @@
 /*   By: qtran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/03 09:41:10 by qtran             #+#    #+#             */
-/*   Updated: 2018/07/03 09:43:45 by qtran            ###   ########.fr       */
+/*   Updated: 2018/07/03 15:04:14 by qtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,24 @@
 # include <uuid/uuid.h>
 # include <time.h>
 # include "libft/libft.h"
+# define SP 20
+typedef unsigned char u_char;
 
+typedef struct	s_option
+{
+	u_char	l;
+	u_char	R;
+	u_char	a;
+	u_char	r;
+	u_char	t;
+}				t_option;
+
+void	ft_space(int n, int count);
+void	ft_print_dir(const char *path);
+int		ft_is_op_valid_assign(char *ch, t_option *op);
+int		is_file_hidden(const char *path);
+int		is_dir(const char *path);
+int		ft_R(const char *path);
+int		ft_R_level(int level_deep);
 
 #endif
