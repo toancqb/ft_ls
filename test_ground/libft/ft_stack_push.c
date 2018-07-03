@@ -6,13 +6,13 @@
 /*   By: qtran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 19:20:56 by qtran             #+#    #+#             */
-/*   Updated: 2017/11/15 20:13:42 by qtran            ###   ########.fr       */
+/*   Updated: 2018/07/02 23:14:42 by qtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_stack_push(t_list **st, t_list *new)
+void	ft_stack_push(t_list **st, t_list *new_elem)
 {
 	t_list *tmp;
 
@@ -20,7 +20,7 @@ void	ft_stack_push(t_list **st, t_list *new)
 	{
 		if (*st == NULL)
 		{
-			*st = new;
+			*st = new_elem;
 		}
 		else
 		{
@@ -29,7 +29,7 @@ void	ft_stack_push(t_list **st, t_list *new)
 			{
 				tmp = tmp->next;
 			}
-			tmp->next = new;
+			tmp->next = new_elem;
 		}
 	}
 }

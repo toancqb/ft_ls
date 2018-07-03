@@ -1,33 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd.c                                        :+:      :+:    :+:   */
+/*   ft_queue_num_elem.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qtran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/15 16:47:55 by qtran             #+#    #+#             */
-/*   Updated: 2018/07/02 23:15:17 by qtran            ###   ########.fr       */
+/*   Created: 2018/07/02 23:04:36 by qtran             #+#    #+#             */
+/*   Updated: 2018/07/02 23:06:14 by qtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd(t_list **lst, t_list *new_elem)
+size_t	ft_queue_num_elem(t_list *st)
 {
-	t_list *tmp;
-
-	if (lst)
-	{
-		if (*lst == NULL)
-		{
-			*lst = new_elem;
-			(*lst)->next = 0;
-		}
-		else
-		{
-			tmp = *lst;
-			*lst = new_elem;
-			new_elem->next = tmp;
-		}
-	}
+	return (ft_stack_num_elem(st));
 }

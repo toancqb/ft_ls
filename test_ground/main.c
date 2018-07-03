@@ -6,7 +6,7 @@
 /*   By: qtran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/02 21:12:47 by qtran             #+#    #+#             */
-/*   Updated: 2018/07/02 22:32:22 by qtran            ###   ########.fr       */
+/*   Updated: 2018/07/03 09:25:20 by qtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ int ft_R(const char *name)
 	{
 		ft_putstr(dp->d_name);
 		if (isDir((const char*)&dp->d_name))
-			ft_stack_push(&st, ft_stack_init_elem((const char*)&dp->d_name, ft_strlen((const char *)&dp->d_name)));
+			ft_queue_push(&st, ft_queue_init_elem((const char*)&dp->d_name, ft_strlen((const char *)&dp->d_name)));
 		ft_format(++count);
 	}
-	while (ft_stack_num_elem(st) != 0)
+	while (ft_queue_is_empty(st) == 0)
 	{
-		ft_R((const char*)ft_stack_pop(&st));
+		ft_R((const char*)ft_queue_pop(&st));
 	}
 	(void)closedir(dirp);
 	return (0);

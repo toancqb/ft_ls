@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd.c                                        :+:      :+:    :+:   */
+/*   ft_queue_pop.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qtran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/15 16:47:55 by qtran             #+#    #+#             */
-/*   Updated: 2018/07/02 23:15:17 by qtran            ###   ########.fr       */
+/*   Created: 2018/07/02 23:16:02 by qtran             #+#    #+#             */
+/*   Updated: 2018/07/03 08:59:13 by qtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd(t_list **lst, t_list *new_elem)
+static void		pop(void *c, t_list **tmp)
 {
-	t_list *tmp;
+	ft_memcpy(c, (*tmp)->content, (*tmp)->content_size);
+	ft_queue_clr(tmp);
+}
 
-	if (lst)
-	{
-		if (*lst == NULL)
-		{
-			*lst = new_elem;
-			(*lst)->next = 0;
-		}
-		else
-		{
-			tmp = *lst;
-			*lst = new_elem;
-			new_elem->next = tmp;
-		}
-	}
+void			*ft_queue_pop(t_list **st)
+{
+	t_list	*tmp;
+	void	*c;
+
+	tmp = *st;
+	if (!(*st) || !(c = (void*)malloc(sizeof(void) * tmp->content_size)) || !c)
+		return (NULL);
+	*st = tmp->next;
+	pop(c, &tmp);
+	return (c);
 }

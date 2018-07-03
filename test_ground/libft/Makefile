@@ -6,7 +6,7 @@
 #    By: qtran <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 13:40:55 by qtran             #+#    #+#              #
-#    Updated: 2017/11/21 14:15:32 by qtran            ###   ########.fr        #
+#    Updated: 2018/07/03 09:15:24 by qtran            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,7 +76,13 @@ SRC =	ft_isalpha.c \
 		ft_stack_is_empty.c \
 		ft_stack_num_elem.c \
 		ft_stack_pop.c \
-		ft_stack_push.c 
+		ft_stack_push.c \
+		ft_queue_clr.c \
+		ft_queue_init_elem.c \
+		ft_queue_is_empty.c \
+		ft_queue_num_elem.c \
+		ft_queue_push.c \
+		ft_queue_pop.c
 
 BIN = $(SRC:.c=.o)
 HEADER = libft.h
