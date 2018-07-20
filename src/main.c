@@ -6,14 +6,14 @@
 /*   By: qtran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/03 14:43:48 by qtran             #+#    #+#             */
-/*   Updated: 2018/07/03 14:59:49 by qtran            ###   ########.fr       */
+/*   Updated: 2018/07/03 22:18:59 by qtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_lib_ls.h"
+#include "../includes/ft_lib_ls.h"
 
 int		main(int argc, char *argv[])
 {
-	ft_R_level(0);
+	ft_r_upper_level(0);
 	return (0);
 }

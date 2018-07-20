@@ -6,13 +6,13 @@
 /*   By: qtran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/03 12:41:33 by qtran             #+#    #+#             */
-/*   Updated: 2018/07/03 15:21:23 by qtran            ###   ########.fr       */
+/*   Updated: 2018/07/03 22:19:22 by qtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_lib_ls.h"
+#include "../includes/ft_lib_ls.h"
 
-int		ft_R(const char *path)
+int		ft_r_upper(const char *path)
 {
 	DIR				*dirp;
 	struct dirent	*dp;
@@ -38,14 +38,14 @@ int		ft_R(const char *path)
 	{
 		str = (char*)ft_queue_pop(&st);
 		ft_print_dir((const char*)str);
-		ft_R((const char*)str);
+		ft_r_upper((const char*)str);
 		ft_putstr("\n");
 	}
 	(void)closedir(dirp);
 	return (0);
 }
 
-int		ft_R_level(int level_deep)
+int		ft_r_upper_level(int level_deep)
 {
 	DIR				*dirp;
 	struct dirent	*dp;
@@ -62,7 +62,7 @@ int		ft_R_level(int level_deep)
 			ft_space(ft_strlen((const char*)&dp->d_name), ++count);
 		}
 	else
-		ft_R("./");
+		ft_r_upper("./");
 	(void)closedir(dirp);
 	return (0);
 }

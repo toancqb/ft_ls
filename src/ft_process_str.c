@@ -6,11 +6,11 @@
 /*   By: qtran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/03 09:50:50 by qtran             #+#    #+#             */
-/*   Updated: 2018/07/03 15:02:55 by qtran            ###   ########.fr       */
+/*   Updated: 2018/07/03 22:16:33 by qtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_lib_ls.h"
+#include "../includes/ft_lib_ls.h"
 
 static void	ft_assign_op(t_option *op, char c)
 {

@@ -6,11 +6,11 @@
 /*   By: qtran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/03 12:42:30 by qtran             #+#    #+#             */
-/*   Updated: 2018/07/03 14:46:43 by qtran            ###   ########.fr       */
+/*   Updated: 2018/07/03 22:16:09 by qtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_lib_ls.h"
+#include "../includes/ft_lib_ls.h"
 
 int		is_file_hidden(const char *path)
 {
