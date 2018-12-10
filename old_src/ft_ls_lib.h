@@ -26,23 +26,15 @@ typedef struct s_opt
 
 typedef struct s_env
 {
-	const char *path;
-	t_list **st;
-	u_char isf;
-	//
-
-	//	
+	char *target;
+	
 } t_env;
 
 void	parsing_name(const char *path, t_list **st,
-	void (*f_parse)(const char*, t_list**
-		, void (*sx)(t_list**, int (*ft_strcmp_Mm)(char*,char*))));
-void	parsing_name_simple(const char *path, t_list **st
-	, void (*sx)(t_list**, int (*ft_strcmp_Mm)(char*,char*)));
-void	parsing_name_all(const char *path, t_list **st
-	, void (*sx)(t_list**, int (*ft_strcmp_Mm)(char*,char*)));
-void	parsing_name_aR(const char *path, t_list **st
-	, void (*sx)(t_list**, int (*ft_strcmp_Mm)(char*,char*)));
+	void (*f_parse)(const char*, t_list**));
+void	parsing_name_simple(const char *path, t_list **st);
+void	parsing_name_all(const char *path, t_list **st);
+void	parsing_name_aR(const char *path, t_list **st);
 void	display_simple(t_list **st);
 int		ft_strcmp_Mm(char *str1, char *str2);
 void	sorting(t_list **st, int (*f_sort)(char*,char*));
