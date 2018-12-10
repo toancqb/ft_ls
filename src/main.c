@@ -1,19 +1,32 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: qtran <marvin@42.fr>                       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/03 14:43:48 by qtran             #+#    #+#             */
-/*   Updated: 2018/07/03 22:18:59 by qtran            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
-#include "../includes/ft_lib_ls.h"
+#include "../includes/ft_ls_lib.h"
 
-int		main(int argc, char *argv[])
+int isHidden(const char *path)
 {
-	ft_r_upper_level(0);
+	int len;
+
+	len = ft_strlen(path) - 1;
+	while (len >= 0 && path[len] != '/')
+	{
+		if (path[len] == '.' && (len == 0 || (len > 0 && path[len - 1] == '/')))
+			return (1);
+		len--;
+	}
+	return (0);
+}
+
+int isDir(const char *path)
+{
+	struct stat statbuf;
+
+	if (stat(path, &statbuf) != 0 || isHidden(path))
+		return (0);
+	return S_ISDIR(statbuf.st_mode);
+}
+
+int	main(int argc, char *argv[])
+{
+
+	ft_ls((const char*)argv[1]);
 	return (0);
 }

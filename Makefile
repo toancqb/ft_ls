@@ -1,48 +1,16 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: qtran <marvin@42.fr>                       +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/07/03 21:51:03 by qtran             #+#    #+#              #
-#    Updated: 2018/07/03 22:12:26 by qtran            ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
-NAME = ft_ls
+FLAGS=
 
-CC = gcc
-CFLAGS = -Wall -Werror -Wextra
-
-INC_DIR = ./includes/
-SRC_DIR = ./src/
-SRC_NAMES = $(addprefix src/, $(shell ls $(SRC_DIR) | grep -E ".+\.c"))
-OBJ = $(SRC_NAMES:.c=.o)
-
-LIB_DIR = ./libft/
-LIBFT = ./libft/libft.a
-
-BUILD_DIR = ./build/
-BUILD_OBJ = $(addprefix $BUILD_DIR), $(OBJ))
-
-#########################
-#all: $(BUILD_DIR) $(LIBFT) $(NAME)
-#
-#$(BUILD_DIR):
-#	mkdir -p $(BUILD_DIR)
-#
-#$(BUILD_DIR)%.o:$(SRCDIR)%.c
-#	$(CC) $(CFLAGS) -I
-#########################
+SRC=src/*.c
+INC=includes/*.h
+OBJ=src/*.o
+PROJET_NAME=ft_ls
+LIB=libft/libft.a
 
 all:
-	$(CC) $(SRC_NAMES) $(LIBFT)
-
+	gcc $(FLAGS) $(SRC) $(LIB) -o $(PROJET_NAME)
 clean:
-	rm -rf $(OBJ)
-
+	/bin/rm -f $(OBJ)
 fclean: clean
-	rm -rf $(NAME)
-
-re: fclean all
+	/bin/rm -f $(PROJET_NAME)
+re:	fclean	all	
