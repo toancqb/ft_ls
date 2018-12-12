@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_queue_init_elem.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qtran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/15 17:57:50 by qtran             #+#    #+#             */
-/*   Updated: 2017/11/15 18:12:42 by qtran            ###   ########.fr       */
+/*   Created: 2018/07/02 22:58:28 by qtran             #+#    #+#             */
+/*   Updated: 2018/07/02 23:01:10 by qtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list **alst)
+t_list	*ft_queue_init_elem2(void const *content, size_t content_size, unsigned char isf)
 {
-	if (alst)
-	{
-		free((*alst)->content);
-		free(*alst);
-		*alst = NULL;
-	}
+	return (ft_stack_init_elem2(content, content_size, isf));
 }

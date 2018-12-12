@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
+void	ft_lstdel(t_list **alst)
 {
 	t_list *tmp;
 	t_list *d;
@@ -24,7 +24,7 @@ void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
 		{
 			d = tmp;
 			tmp = tmp->next;
-			ft_lstdelone(&d, del);
+			ft_lstdelone(&d);
 		}
 		*alst = NULL;
 	}

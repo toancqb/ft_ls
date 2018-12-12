@@ -82,7 +82,9 @@ SRC =	ft_isalpha.c \
 		ft_queue_is_empty.c \
 		ft_queue_num_elem.c \
 		ft_queue_push.c \
-		ft_queue_pop.c
+		ft_queue_pop.c \
+		ft_queue_init_elem2.c \
+		ft_stack_init_elem2.c
 
 BIN = $(SRC:.c=.o)
 HEADER = libft.h

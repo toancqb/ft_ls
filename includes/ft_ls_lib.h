@@ -28,24 +28,32 @@ typedef struct s_env
 {
 	const char *path;
 	t_list **st;
-	u_char isf;
+	//u_char isf;
 	//
 
 	//	
 } t_env;
 
-void	parsing_name(const char *path, t_list **st,
-	void (*f_parse)(const char*, t_list**
+void	parsing_name(t_env *env, void (*f_parse)(t_env* 
 		, void (*sx)(t_list**, int (*ft_strcmp_Mm)(char*,char*))));
-void	parsing_name_simple(const char *path, t_list **st
+
+void	parsing_name_simple(t_env *env
 	, void (*sx)(t_list**, int (*ft_strcmp_Mm)(char*,char*)));
-void	parsing_name_all(const char *path, t_list **st
+
+void	parsing_name_all(t_env *env
 	, void (*sx)(t_list**, int (*ft_strcmp_Mm)(char*,char*)));
-void	parsing_name_aR(const char *path, t_list **st
+
+void	parsing_name_aR(t_env *env
 	, void (*sx)(t_list**, int (*ft_strcmp_Mm)(char*,char*)));
-void	display_simple(t_list **st);
+
+void	display_st(t_list *st);
+void	display_simple(t_env *env);
+void	display_aR(t_env *env);
 int		ft_strcmp_Mm(char *str1, char *str2);
 void	sorting(t_list **st, int (*f_sort)(char*,char*));
+int isDir(const char *path);
+int isHidden(const char *path);
+int	isHidden_pwd(const char *path);
 
 //
 //
