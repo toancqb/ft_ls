@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_ls_lib.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: qtran <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/18 20:16:03 by qtran             #+#    #+#             */
+/*   Updated: 2018/12/18 20:16:09 by qtran            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef FT_LS_LIB_H
 # define FT_LS_LIB_H
@@ -10,6 +21,7 @@
 # include <pwd.h>
 //# include <uuid/uuid.h>
 # include <time.h>
+# include <stdio.h>
 # include "../libft/libft.h"
 # define ERROR_CHECK(x) if (!x) { perror("Can't process"); exit(0);}
 
@@ -33,6 +45,8 @@ typedef struct s_env
 
 	//	
 } t_env;
+
+void	ft_ls(const char *path);
 
 void	parsing_name(t_env *env, void (*f_parse)(t_env* 
 		, void (*sx)(t_list**, int (*ft_strcmp_Mm)(char*,char*))));
