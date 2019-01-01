@@ -51,13 +51,13 @@ int ft_R(const char *name, t_list **st
 {
 	DIR				*dir;
 	struct dirent	*dptr;
-	t_list			*tmp;
+	static t_list			*tmp;
 	char			*n;
 	t_list			*t;
-	
+
 	if (!isDir(name))
 		return (0);
-	tmp = NULL; t = NULL;
+	t = NULL;
 	ERROR_CHECK((dir = opendir(name)));
 	ft_putstr("<<<");ft_putstr(name); ft_putstr(">>>:\n");
 	while ((dptr = readdir(dir)) != NULL)
@@ -77,53 +77,28 @@ int ft_R(const char *name, t_list **st
 	{
 		ft_R(ft_queue_pop(&tmp), st, sx);
 	}
-	ft_lstdel(&tmp);
+//	ft_lstdel(&tmp);
 //	ft_lstdel(&t);  does not WORK !!!
 	ERROR_CHECK(!(closedir(dir)));
 	return (0);
 }
 
-/*int ft_R2(const char *name, t_list **st
+/*int ft_R(const char *name, t_list **st
 , void (*sx)(t_list**, int (*ft_strcmp_Mm)(char*,char*))) //++
 {
-	DIR				*dir;
-	struct dirent	*dptr;
-	t_list			*tmp;
-	char			*n;
-	t_list			*tt;
-	
+	DIR *dir;
+	struct drent *dptr;
+
 	if (!isDir(name))
 		return (0);
-	tmp = NULL; tt = NULL;
-	ERROR_CHECK((dir = opendir(name)));
+		ERROR_CHECK((dir = opendir(name)));
 		ft_putstr("<<<");ft_putstr(name); ft_putstr(">>>:\n");
-
-	while ((dptr = readdir(dir)) != NULL)
-	{
-		n = ft_strdup(dptr->d_name);
-//				ft_putstr(n); ft_putstr("  ");
-
-		if (isDir(n) && !isHidden_pwd(n))
-		{
-			ft_queue_push(&tmp, ft_queue_init_elem(n, ft_strlen(n)));
-		}
-		ft_queue_push(&tt, ft_queue_init_elem(n, ft_strlen(n)));
-		free(n);
-	}
-	display_st(tt);
-	while (!ft_queue_is_empty(tmp))
-	{
-		ft_R2(ft_queue_pop(&tmp), st, sx);
-	}
-	ft_lstdel(&tmp);
-	ERROR_CHECK(!(closedir(dir)));
-	return (0);
 }*/
 
 void	parsing_name_aR(t_env *env
 	, void (*sx)(t_list**, int (*ft_strcmp_Mm)(char*,char*))) //++
 {
-	ft_R(env->path, env->st, &sorting);
+	ft_R(env->path, env->st, sx);
 }
 
 void	parsing_name(t_env *env

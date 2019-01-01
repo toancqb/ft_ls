@@ -33,7 +33,7 @@ typedef struct s_opt
 	u_char	R;
 	u_char	a;
 	u_char	r;
-	u_char	t;	
+	u_char	t;
 } t_opt;
 
 typedef struct s_env
@@ -43,12 +43,12 @@ typedef struct s_env
 	//u_char isf;
 	//
 
-	//	
+	//
 } t_env;
 
 void	ft_ls(const char *path);
 
-void	parsing_name(t_env *env, void (*f_parse)(t_env* 
+void	parsing_name(t_env *env, void (*f_parse)(t_env*
 		, void (*sx)(t_list**, int (*ft_strcmp_Mm)(char*,char*))));
 
 void	parsing_name_simple(t_env *env

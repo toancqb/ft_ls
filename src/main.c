@@ -42,8 +42,10 @@ int	isHidden_pwd(const char *path)
 
 int	main(int argc, char *argv[])
 {
-
-	ft_ls((const char*)argv[1]);
+	if (argc >= 30)
+		ft_putstr("Too Many Arguments");
+	else
+		ft_ls((const char*)argv[1]);
 
 	//printf("%d  %d \n", isHidden_pwd("libft"), isHidden_pwd(".."));
 

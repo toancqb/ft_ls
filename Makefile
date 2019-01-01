@@ -38,7 +38,7 @@ BUILD_OBJ = $(addprefix $BUILD_DIR), $(OBJ))
 #########################
 
 all:
-	$(CC) $(SRC_NAMES) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(SRC_NAMES) $(LIBFT) -o $(NAME)
 
 clean:
 	rm -rf $(OBJ)
