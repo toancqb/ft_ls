@@ -50,7 +50,7 @@ int ft_R(const char *name, t_list **st
 , void (*sx)(t_list**, int (*ft_strcmp_Mm)(char*,char*))) //++
 {
 	/*
-	 * 
+	 * Somehow algo doesnt work 
 	 * Error in t_list : "..zw"instead of ".." !!!!!!!!!!!!!
 	 * New funcs: ft_strjoin_path (test ok) isHidden_pwd (test ok)
 	 * Funcs need to be reviewed: swap strlen of t_list content
@@ -68,12 +68,12 @@ int ft_R(const char *name, t_list **st
 	while ((dptr = readdir(dir)) != NULL)
 	{
 		n = ft_strdup(dptr->d_name);
-		//ft_putstr("\n\n---"); ft_putstr(n); ft_putstr("---\n\n");
 		ft_queue_push(&t, ft_queue_init_elem(n, ft_strlen(n)));
 
 		free(n);
 	}
 	(*sx)(&t, &ft_strcmp_Mm);
+	error_fix_tmp(&t);
 	display_st(t);
 	while (!ft_queue_is_empty(t))
 	{

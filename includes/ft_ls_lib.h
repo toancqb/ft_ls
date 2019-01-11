@@ -71,6 +71,8 @@ int	isHidden_pwd(const char *path);
 
 void	ft_lst_add_lst(t_list **st, t_list **tmp);
 char *ft_strjoin_path(char *str1, char *str2);
+void	ft_putnstr(char *str, int len);
+void	error_fix_tmp(t_list **t);
 //
 //
 //	sort_ls(t_list **st, &sort)

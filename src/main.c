@@ -41,14 +41,14 @@ int	isHidden_pwd(const char *path)
 	char **tab;
 
 	if (!ft_strchr(path, '/'))
-		return (!ft_strcmp(path, ".") || !ft_strncmp(path, "..", 2));
+		return (!ft_strcmp(path, ".") || !ft_strcmp(path, ".."));
 	tab = ft_strsplit(path, '/');
 	i = 0;
 	while (tab[i] != NULL)
 	{
 		i++;
 	}
-	return (!ft_strcmp(tab[i - 1], ".") || !ft_strncmp(tab[i - 1], "..", 2));
+	return (!ft_strcmp(tab[i - 1], ".") || !ft_strcmp(tab[i - 1], ".."));
 }
 
 int	main(int argc, char *argv[])

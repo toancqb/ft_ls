@@ -74,3 +74,15 @@ char *ft_strjoin_path(char *str1, char *str2)
 	}
 	return (str);
 }
+
+void	ft_putnstr(char *str, int len)
+{
+	int i;
+
+	i = 0;
+	while (i < len && str[i] != '\0')
+	{
+		ft_putchar(str[i]);
+		i++;
+	}
+}

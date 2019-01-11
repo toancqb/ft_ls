@@ -19,7 +19,7 @@ void	display_st(t_list *st)
 	count = 1;
 	while(st != NULL)
 	{
-		ft_putstr(st->content);
+		ft_putnstr(st->content, st->content_size);
 		(count % 4 != 0) ? ft_putstr("  ") : ft_putchar('\n');
 		count++;
 		st = st->next;
