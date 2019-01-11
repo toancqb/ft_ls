@@ -15,15 +15,26 @@
 void	swap_alphabet(t_list **a, t_list **b)
 {
 	t_list *tmp;
+	//t_list *tmp2;
 
-	tmp = (t_list*)malloc(sizeof(t_list));
-	tmp->content = (*a)->content;
-	tmp->content_size = (*a)->content_size;
-	(*a)->content = (*b)->content;
+	/*tmp = (t_list*)malloc(sizeof(t_list));
+	tmp->content       = (*a)->content;
+	tmp->content_size  = (*a)->content_size;
+
+	(*a)->content      = (*b)->content;
 	(*a)->content_size = (*b)->content_size;
-	(*b)->content = tmp->content;
+
+	(*b)->content      = tmp->content;
+	(*b)->content_size = tmp->content_size;*/
+	//tmp2 = *a;
+	tmp = ft_queue_init_elem((*a)->content, (*a)->content_size);
+	(*a)->content      = (*b)->content;
+	(*a)->content_size = (*b)->content_size;
+
+	(*b)->content      = tmp->content;
 	(*b)->content_size = tmp->content_size;
-	free(tmp);
+	//free(tmp2->content);
+	//free(tmp2);
 }
 
 void	sorting(t_list **st, int (*f_sort)(char*,char*))

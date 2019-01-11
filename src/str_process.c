@@ -48,3 +48,29 @@ int		ft_strcmp_Mm(char *s1, char *s2)
 	}
 	return (0);
 }
+
+char *ft_strjoin_path(char *str1, char *str2)
+{
+	char *str;
+	int	i;
+	int	j;
+
+	str = (char*)malloc(sizeof(char) * (ft_strlen(str1) + ft_strlen(str2)));
+	str[ft_strlen(str1) + ft_strlen(str2)] = '\0';
+	i = 0;
+	while (str1[i] != '\0')
+	{
+		str[i] = str1[i];
+		i++;
+	}
+	str[i] = 47;
+	j = 0;
+	i++;
+	while (str2[j] != '\0')
+	{
+		str[i] = str2[j];
+		i++;
+		j++;
+	}
+	return (str);
+}

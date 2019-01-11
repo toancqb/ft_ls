@@ -14,5 +14,10 @@
 
 void	ft_queue_clr(t_list **st)
 {
-	(void)ft_stack_clr(st);
+	if (st)
+	{
+		free((*st)->content);
+		free(*st);
+		*st = NULL;
+	}
 }

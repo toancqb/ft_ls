@@ -26,7 +26,7 @@ void			*ft_queue_pop(t_list **st)
 	tmp = *st;
 	if (!(*st) || !(c = (void*)malloc(sizeof(void) * tmp->content_size)) || !c)
 		return (NULL);
-	*st = tmp->next;
+	*st = (*st)->next;
 	pop(c, &tmp);
 	return (c);
 }

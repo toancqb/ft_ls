@@ -69,6 +69,8 @@ int isDir(const char *path);
 int isHidden(const char *path);
 int	isHidden_pwd(const char *path);
 
+void	ft_lst_add_lst(t_list **st, t_list **tmp);
+char *ft_strjoin_path(char *str1, char *str2);
 //
 //
 //	sort_ls(t_list **st, &sort)

@@ -37,7 +37,18 @@ int isDir(const char *path)
 
 int	isHidden_pwd(const char *path)
 {
-	return (!ft_strcmp(path, ".") || !ft_strcmp(path, ".."));
+	int i;
+	char **tab;
+
+	if (!ft_strchr(path, '/'))
+		return (!ft_strcmp(path, ".") || !ft_strncmp(path, "..", 2));
+	tab = ft_strsplit(path, '/');
+	i = 0;
+	while (tab[i] != NULL)
+	{
+		i++;
+	}
+	return (!ft_strcmp(tab[i - 1], ".") || !ft_strncmp(tab[i - 1], "..", 2));
 }
 
 int	main(int argc, char *argv[])
@@ -48,6 +59,7 @@ int	main(int argc, char *argv[])
 		ft_ls((const char*)argv[1]);
 
 	//printf("%d  %d \n", isHidden_pwd("libft"), isHidden_pwd(".."));
-
+	//ft_putnbr(argc); ft_putstr(argv[1]); ft_putchar('\n');
+	//ft_putnbr(isHidden_pwd(argv[1])); ft_putchar('\n');
 	return (0);
 }
