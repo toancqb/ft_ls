@@ -2,10 +2,14 @@
 #include "../queue/ft_queue_lib.h"
 
 int ft_test1(const char *name)
-{
+{/*
+	* FIXED .dfefewf ..dfglkfghkf
+	* CHECK PERMISSION AND IGNORE
+	*	GOOD LUCK!
+	*/
 	DIR *dir;
 	struct dirent *dptr;
-	char *n;
+	char *n,*m;
 	t_queue **qt;
 
 	if (!isDir(name))
@@ -22,12 +26,14 @@ int ft_test1(const char *name)
 	queue_display(*qt);
 	while (!queue_is_empty(*qt))
 	{
-		n = ft_strjoin_path((char*)name, queue_pop(qt));
-		ft_putstr("__CHECK "); ft_putstr(n); ft_putstr("__\n");
+		m = queue_pop(qt);
+	//	ft_putstr("__CHECK POP "); ft_putstr(m); ft_putstr("__\n");
+		n = ft_strjoin_path((char*)name, m);
+	//	ft_putstr("__CHECK "); ft_putstr(n); ft_putstr("__\n");
 		if (isDir(n) && !isHidden_pwd(n))
 		{
-			ft_putstr("\n");
-			ft_putstr("__POP "); ft_putstr(n); ft_putstr("__\n");
+			//ft_putstr("\n"); <----------- PROBLEM IS HERE!!!!!!!!!
+		//	ft_putstr("__POP "); ft_putstr(n); ft_putstr("__\n");
 			ft_test1((const char*)n);
 		}
 		free(n);
