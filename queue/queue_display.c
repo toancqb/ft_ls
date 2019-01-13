@@ -21,6 +21,6 @@ void	queue_display(t_queue *qt)
       ft_putstr(qt->str); ft_putstr("  ");
       qt = qt->next;
     }
-    //ft_putchar('\n');
+    ft_putchar('\n');
   }
 }

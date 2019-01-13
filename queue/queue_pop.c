@@ -29,7 +29,7 @@ char	*queue_pop(t_queue **qt)
   else
   {
     q = *qt;
-    tmp = ft_strdup2(q->str);
+    tmp = ft_strdup(q->str);
     *qt = (*qt)->next;
   //  free(q->str);
   //  free(q);

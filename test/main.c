@@ -1,6 +1,11 @@
 #include "../includes/ft_ls_lib.h"
 #include "../queue/ft_queue_lib.h"
 
+void newln(void)
+{
+	ft_putchar('\n');
+}
+
 int ft_test1(const char *name)
 {/*
 	* FIXED .dfefewf ..dfglkfghkf
@@ -27,13 +32,14 @@ int ft_test1(const char *name)
 	while (!queue_is_empty(*qt))
 	{
 		m = queue_pop(qt);
-	//	ft_putstr("__CHECK POP "); ft_putstr(m); ft_putstr("__\n");
+		//ft_putstr("__CPOP "); ft_putstr(m); ft_putstr("__\n");
 		n = ft_strjoin_path((char*)name, m);
-	//	ft_putstr("__CHECK "); ft_putstr(n); ft_putstr("__\n");
+		//ft_putstr("__CHECK "); ft_putstr(n); ft_putstr("__\n");
 		if (isDir(n) && !isHidden_pwd(n))
 		{
 			//ft_putstr("\n"); <----------- PROBLEM IS HERE!!!!!!!!!
-		//	ft_putstr("__POP "); ft_putstr(n); ft_putstr("__\n");
+			//ft_putstr("__POP "); ft_putstr(n); ft_putstr("__\n");
+			newln();
 			ft_test1((const char*)n);
 		}
 		free(n);
