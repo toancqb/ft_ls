@@ -34,13 +34,15 @@ void	parsing_name_simple(t_env *env
 {
 	DIR *dir;
 	struct dirent *dptr;
+	char *n;
 
 	ERROR_CHECK((dir = opendir(env->path)));
 	while((dptr = readdir(dir)) != NULL)
 	{
-		if (!isHidden((const char*)dptr->d_name))
-		ft_queue_push(env->st, ft_queue_init_elem((void*)(dptr->d_name)
-			,ft_strlen(dptr->d_name)));
+		n = ft_strdup(dptr->d_name);
+		if (!isHidden_pwd(n))
+			ft_queue_push(env->st, ft_queue_init_elem((void*)n, ft_strlen(n)));
+		free(n);
 	}
 	(*sx)(env->st, &ft_strcmp_Mm);
 	ERROR_CHECK((!closedir(dir)));
@@ -50,7 +52,7 @@ int ft_R(const char *name, t_list **st
 , void (*sx)(t_list**, int (*ft_strcmp_Mm)(char*,char*))) //++
 {
 	/*
-	 * Somehow algo doesnt work 
+	 * Somehow algo doesnt work
 	 * Error in t_list : "..zw"instead of ".." !!!!!!!!!!!!!
 	 * New funcs: ft_strjoin_path (test ok) isHidden_pwd (test ok)
 	 * Funcs need to be reviewed: swap strlen of t_list content
@@ -69,22 +71,20 @@ int ft_R(const char *name, t_list **st
 	{
 		n = ft_strdup(dptr->d_name);
 		ft_queue_push(&t, ft_queue_init_elem(n, ft_strlen(n)));
-
 		free(n);
 	}
 	(*sx)(&t, &ft_strcmp_Mm);
-	error_fix_tmp(&t);
+	//error_fix_tmp(&t);
 	display_st(t);
-	while (!ft_queue_is_empty(t))
+	while (/*!ft_queue_is_empty(t)*/ t != NULL)
 	{
 		n = ft_strjoin_path((char*)name, ft_queue_pop(&t));
 		if (isDir(n) && !isHidden_pwd(n))
 		{
 			ft_putstr("\n");
-			ft_R(n, st, sx);
+			ft_R((const char*)n, st, sx);
 		}
 		free(n);
-		n = NULL;	
 	}
 	//ft_lstdel(&t);  //does not WORK !!!
 	ERROR_CHECK(!(closedir(dir)));

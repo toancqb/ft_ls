@@ -26,31 +26,6 @@ int isHidden(const char *path)
 	return (0);
 }
 
-int isDir(const char *path)
-{
-	struct stat statbuf;
-
-	if (stat(path, &statbuf) != 0 /*|| isHidden(path)*/)
-		return (0);
-	return S_ISDIR(statbuf.st_mode);
-}
-
-int	isHidden_pwd(const char *path)
-{
-	int i;
-	char **tab;
-
-	if (!ft_strchr(path, '/'))
-		return (!ft_strcmp(path, ".") || !ft_strcmp(path, ".."));
-	tab = ft_strsplit(path, '/');
-	i = 0;
-	while (tab[i] != NULL)
-	{
-		i++;
-	}
-	return (!ft_strcmp(tab[i - 1], ".") || !ft_strcmp(tab[i - 1], ".."));
-}
-
 int	main(int argc, char *argv[])
 {
 	if (argc >= 30)

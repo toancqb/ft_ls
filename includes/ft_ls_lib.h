@@ -66,6 +66,7 @@ void	display_aR(t_env *env);
 int		ft_strcmp_Mm(char *str1, char *str2);
 void	sorting(t_list **st, int (*f_sort)(char*,char*));
 int isDir(const char *path);
+int isDir2(const char *path);
 int isHidden(const char *path);
 int	isHidden_pwd(const char *path);
 
@@ -73,6 +74,8 @@ void	ft_lst_add_lst(t_list **st, t_list **tmp);
 char *ft_strjoin_path(char *str1, char *str2);
 void	ft_putnstr(char *str, int len);
 void	error_fix_tmp(t_list **t);
+void	display_simple2(t_env *env);
+t_list *ft_queue_init_str(char *str, int str_len);
 //
 //
 //	sort_ls(t_list **st, &sort)

@@ -12,6 +12,51 @@
 
 #include "../includes/ft_ls_lib.h"
 
+int isDir(const char *path)
+{
+	struct stat statbuf;
+
+	if (stat(path, &statbuf) != 0 /*|| isHidden(path)*/)
+		return (0);
+	return S_ISDIR(statbuf.st_mode);
+}
+
+int isDir2(const char *path)
+{
+	struct stat *buf;
+
+	if (stat(path, buf) != 0)
+		return (0);
+	if ((buf->st_mode & S_IFCHR) != S_IFCHR && (buf->st_mode & S_IFBLK)
+			!= S_IFBLK && (buf->st_mode & S_IFDIR))
+		return (1);
+	return (0);
+}
+
+int	isHidden_pwd(const char *path)
+{
+	int i;
+	char **tab;
+	int check;
+
+	check = 0;
+	if (!ft_strchr(path, '/'))
+		return (!ft_strcmp(path, ".") || !ft_strcmp(path, ".."));
+	tab = ft_strsplit(path, '/');
+	i = 0;
+	while (tab[i] != NULL)
+	{
+		i++;
+	}
+	check = (!ft_strcmp(tab[i - 1], ".") || !ft_strcmp(tab[i - 1], ".."));
+	while (tab[i] != NULL)
+	{
+		free(tab[i]);
+		i++;
+	}
+	return (check);
+}
+
 int		is_M(char s)
 {
 	return (s >= 'A' && s <= 'Z');

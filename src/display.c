@@ -12,6 +12,16 @@
 
 #include "../includes/ft_ls_lib.h"
 
+/*
+ *	New Chapter: queue string
+ */
+
+
+
+/*
+ *
+ */
+
 void	display_st(t_list *st)
 {
 	int count;
@@ -38,6 +48,11 @@ void	display_simple(t_env *env)
 		(*(env->st)) = (*(env->st))->next;
 	}
 	ft_putchar('\n');
+}
+
+void	display_simple2(t_env *env)
+{
+	display_st(*(env->st));
 }
 
 void	display_aR(t_env *env)
