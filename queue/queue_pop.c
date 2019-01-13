@@ -1,32 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   queue_pop.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: qtran <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/13 19:23:08 by qtran             #+#    #+#             */
+/*   Updated: 2019/01/13 19:23:45 by qtran            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_queue_lib.h"
 
-char	*ft_strdup2(const char *s1)
+char	*queue_pop(t_queue **qt)
 {
-	char	*str;
-	int		i;
-
-	if (!(str = (char*)malloc(sizeof(char) * (ft_strlen(s1) + 1))) || !str)
-		return (NULL);
-	i = 0;
-	while (s1[i] != '\0')
-	{
-		str[i] = s1[i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
-}
-
-char *queue_pop(t_queue **qt)
-{
-  t_queue *q;
-  char *tmp;
+  t_queue	*q;
+  char		*tmp;
 
   if (!qt || !(*qt))
     return (NULL);
   if ((*qt)->next == NULL)
   {
-    tmp = ft_strdup2((*qt)->str);
+    tmp = ft_strdup((*qt)->str);
     //free((*qt)->str);
   //  free(*qt);
     *qt = NULL;

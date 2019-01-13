@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   queue_init_root.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: qtran <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/13 19:22:22 by qtran             #+#    #+#             */
+/*   Updated: 2019/01/13 19:22:32 by qtran            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_queue_lib.h"
 
-t_queue **queue_init_root(void)
+t_queue	**queue_init_root(void)
 {
-  t_queue **qt;
+  t_queue	**qt;
 
   qt = (t_queue**)malloc(sizeof(t_queue*));
   *qt = NULL;
