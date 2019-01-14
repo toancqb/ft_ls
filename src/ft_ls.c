@@ -22,8 +22,9 @@ void	ft_ls(const char *path)
 	env = (t_env*)malloc(sizeof(t_env));
 	env->path = path;
 	//env->st = (t_list**)malloc(sizeof(t_list*));
-	env->st = NULL;
-	parsing_name(env, &parsing_name_simple);
+	env->st = (t_list**)malloc(sizeof(t_list*));
+	*(env->st) = NULL;
+	parsing_name(env, &parsing_name_aR);
 	display_simple2(env);
 
 	//ft_lstdel(env->st);

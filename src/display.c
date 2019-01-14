@@ -38,16 +38,16 @@ void	display_st(t_list *st)
 }
 
 void	display_simple(t_env *env)
-{
+{	
+	ft_putchar('\n');
 	while(*(env->st) != NULL)
 	{
 		//if ((*st)->content_size == 0)
 		//	continue ;
 		ft_putstr((*(env->st))->content);
 		ft_putstr("  ");
-		(*(env->st)) = (*(env->st))->next;
+		*(env->st) = (*(env->st))->next;
 	}
-	ft_putchar('\n');
 }
 
 void	display_simple2(t_env *env)

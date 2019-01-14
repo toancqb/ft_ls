@@ -58,6 +58,30 @@ int	isHidden_pwd(const char *path)
 	return (check);
 }
 
+int	isHidden_sp(const char *path)
+{
+	int i;
+	char **tab;
+	int check;
+
+	check = 0;
+	if (!ft_strchr(path, '/'))
+		return (!ft_strncmp(path, ".", 1));
+	tab = ft_strsplit(path, '/');
+	i = 0;
+	while (tab[i] != NULL)
+	{
+		i++;
+	}
+	check = (!ft_strncmp(tab[i - 1], ".", 1));
+	while (tab[i] != NULL)
+	{
+		free(tab[i]);
+		i++;
+	}
+	return (check);
+}
+
 int		is_M(char s)
 {
 	return (s >= 'A' && s <= 'Z');

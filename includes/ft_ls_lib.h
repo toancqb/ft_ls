@@ -76,6 +76,7 @@ void	ft_putnstr(char *str, int len);
 void	error_fix_tmp(t_list **t);
 void	display_simple2(t_env *env);
 t_list *ft_queue_init_str(char *str, int str_len);
+int	isHidden_sp(const char *path);
 //
 //
 //	sort_ls(t_list **st, &sort)
