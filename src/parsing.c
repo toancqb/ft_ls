@@ -59,7 +59,8 @@ int ft_R(const char *name, t_list **st
 	 */
 	DIR				*dir;
 	struct dirent	*dptr;
-	char			*n = NULL,*m = NULL;
+	const char		*n;
+	char			*m;
 	t_list			*t;
 
 	if (!isDir(name))
@@ -69,7 +70,7 @@ int ft_R(const char *name, t_list **st
 	ft_putstr(name); ft_putstr(":\n");
 	while ((dptr = readdir(dir)) != NULL)
 	{
-		n = ft_strdup(dptr->d_name);
+		n = (const char*)dptr->d_name;
 		ft_queue_push(&t, ft_queue_init_elem(n, ft_strlen(n)));
 		//free(n);
 	}
@@ -79,10 +80,9 @@ int ft_R(const char *name, t_list **st
 	while (!ft_queue_is_empty(t))
 	{
 		m = ft_strjoin_path((char*)name, ft_queue_pop(&t));
-		if (isDir(m) && !isHidden_pwd(m))
+		if (isDir((const char*)m) && !isHidden_pwd((const char*)m))
 		{
-			ft_putstr("\n");
-			fflush(stdin);
+			ft_putstr("\n"); fflush(stdin);
 			ft_R((const char*)m, st, sx);
 		}
 		//free(m);

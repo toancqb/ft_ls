@@ -70,10 +70,11 @@ int ft_test2(const char *name)
 		dptr = readdir(dir);
 		if (!dptr)
 			break ;
-		n = dptr->d_name;
+		n = (const char*)dptr->d_name;
 		ft_putstr(n); ft_putstr("  ");
 		m = ft_strjoin_path((char*)name, (char*)n);
-		if (isDir((const char*)m) && !isHidden_pwd((const char*)m))
+		if ((dptr->d_type & DT_DIR) && (strcmp (n, "..") != 0 &&
+				strcmp (n, ".") != 0))
 		{
 			newln();
 			ft_test2((const char*)m);
