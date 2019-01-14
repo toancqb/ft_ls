@@ -58,29 +58,28 @@ int ft_test2(const char *name)
 	*/
 	DIR *dir = NULL;
 	struct dirent *dptr = NULL;
-	char *n,*m;
+	const char *n;
+	char *m;
 
 	if (!isDir(name))
 		return (0);
 	ERROR_CHECK((dir = opendir(name)));
-	ft_putstr(name); ft_putstr(":\n");fflush(stdin);
-	while ((dptr = readdir(dir)) != NULL)
+	ft_putstr(name); ft_putstr(":\n");
+	while (1)
 	{
-		m = ft_strdup(dptr->d_name);fflush(stdin);
-		ft_putstr(m); ft_putstr("  ");
-		fflush(stdin);
-		n = ft_strjoin_path((char*)name, m);
-		if (isDir((const char*)n) && !isHidden_pwd((const char*)n))
+		dptr = readdir(dir);
+		if (!dptr)
+			break ;
+		n = dptr->d_name;
+		ft_putstr(n); ft_putstr("  ");
+		m = ft_strjoin_path((char*)name, (char*)n);
+		if (isDir((const char*)m) && !isHidden_pwd((const char*)m))
 		{
-			ft_putstr("\n__POP"); ft_putstr(n); ft_putstr("__\n");
 			newln();
-fflush(stdin);
-			ft_test2((const char*)n);
+			ft_test2((const char*)m);
 		}
-		free(m);
-		//free(n);
+		//free(m);
 	}
-	fflush(stdin);
 	ERROR_CHECK(!(closedir(dir)));
 	return (1);
 }
