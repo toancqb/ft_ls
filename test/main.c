@@ -3,6 +3,7 @@
 
 void newln(void)
 {
+	//ft_putstr("\n__POP__ "); ft_putstr(m);
 	ft_putchar('\n');
 }
 
@@ -12,8 +13,8 @@ int ft_test1(const char *name)
 	* CHECK PERMISSION AND IGNORE
 	*	GOOD LUCK!
 	*/
-	DIR *dir;
-	struct dirent *dptr;
+	DIR *dir = NULL;
+	struct dirent *dptr = NULL;
 	char *n,*m;
 	t_queue **qt;
 
@@ -39,11 +40,47 @@ int ft_test1(const char *name)
 		{
 			//ft_putstr("\n"); <----------- PROBLEM IS HERE!!!!!!!!!
 			//ft_putstr("__POP "); ft_putstr(n); ft_putstr("__\n");
-			newln();
-			ft_test1((const char*)n);
+
+			//newln((const char*)n);
+			ft_test1((const char*)m);
 		}
 		free(n);
 	}
+	queue_clr_all(qt);
+	ERROR_CHECK(!(closedir(dir)));
+	return (1);
+}
+
+int ft_test2(const char *name)
+{/*
+	* I try to make this func as simple as possible
+	* SOMEHOW it doesnt work well with strings ???
+	*/
+	DIR *dir = NULL;
+	struct dirent *dptr = NULL;
+	char *n,*m;
+
+	if (!isDir(name))
+		return (0);
+	ERROR_CHECK((dir = opendir(name)));
+	ft_putstr(name); ft_putstr(":\n");fflush(stdin);
+	while ((dptr = readdir(dir)) != NULL)
+	{
+		m = ft_strdup(dptr->d_name);fflush(stdin);
+		ft_putstr(m); ft_putstr("  ");
+		fflush(stdin);
+		n = ft_strjoin_path((char*)name, m);
+		if (isDir((const char*)n) && !isHidden_pwd((const char*)n))
+		{
+			ft_putstr("\n__POP"); ft_putstr(n); ft_putstr("__\n");
+			newln();
+fflush(stdin);
+			ft_test2((const char*)n);
+		}
+		free(m);
+		//free(n);
+	}
+	fflush(stdin);
 	ERROR_CHECK(!(closedir(dir)));
 	return (1);
 }
@@ -74,7 +111,7 @@ void ft_test_queue()
 
 int main(int argc, char *argv[])
 {
-	ft_test1(argv[1]);
+	ft_test2(argv[1]);
 	//ft_test_queue();
 	return (0);
 }

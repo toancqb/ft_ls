@@ -22,8 +22,7 @@ char	*queue_pop(t_queue **qt)
   if ((*qt)->next == NULL)
   {
     tmp = ft_strdup((*qt)->str);
-    //free((*qt)->str);
-  //  free(*qt);
+    queue_clr_one(qt);
     *qt = NULL;
   }
   else
@@ -31,8 +30,7 @@ char	*queue_pop(t_queue **qt)
     q = *qt;
     tmp = ft_strdup(q->str);
     *qt = (*qt)->next;
-  //  free(q->str);
-  //  free(q);
+    //queue_clr_one(&q);
   }
   return (tmp);
 }

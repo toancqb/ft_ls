@@ -10,4 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_queue_lib.h"
 
+void queue_clr_all(t_queue **qt)
+{
+  t_queue *tmp;
+  t_queue *t;
+
+  if (qt || *qt == NULL)
+  {
+    tmp = *qt;
+    while (tmp != NULL)
+    {
+      t = tmp;
+      tmp = tmp->next;
+      queue_clr_one(&t);
+    }
+  }
+}

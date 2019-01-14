@@ -35,7 +35,6 @@ void	error_fix_tmp(t_list **t)
 
 t_list *ft_queue_init_str(char *str, int str_len)
 {
-	int i;
 	t_list *t;
 
 	t = (t_list*)malloc(sizeof(t_list));

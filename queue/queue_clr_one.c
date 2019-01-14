@@ -10,4 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_queue_lib.h"
 
+void queue_clr_one(t_queue **q)
+{
+  t_queue *tmp;
+
+  if (q)
+  {
+    tmp = *q;
+    free(tmp->str);
+    free(tmp);
+  }
+}

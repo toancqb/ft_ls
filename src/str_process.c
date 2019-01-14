@@ -25,6 +25,7 @@ int isDir2(const char *path)
 {
 	struct stat *buf;
 
+	buf = NULL;
 	if (stat(path, buf) != 0)
 		return (0);
 	if ((buf->st_mode & S_IFCHR) != S_IFCHR && (buf->st_mode & S_IFBLK)
