@@ -116,43 +116,6 @@ int	isHidden_sp(const char *path)
 	return (check);
 }
 
-int		is_M(char s)
-{
-	return (s >= 'A' && s <= 'Z');
-}
-
-int		is_m(char s)
-{
-	return (s >= 'a' && s <= 'z');
-}
-
-int		Mm_cmp(char s1, char s2)
-{
-	if (is_m(s1) && is_M(s2))
-	{
-		return (s1 - ('a' - 'A') - s2);
-	}
-	else if (is_M(s1) && is_m(s2))
-	{
-		return (s1 + ('a' - 'A') - s2);
-	}
-	return (s1 - s2);
-}
-
-int		ft_strcmp_Mm(char *s1, char *s2)
-{
-	size_t i;
-
-	i = 0;
-	while (s1[i] != '\0' || s2[i] != '\0')
-	{
-		if (Mm_cmp(s1[i], s2[i]))
-			return (Mm_cmp(s1[i], s2[i]));
-		i++;
-	}
-	return (0);
-}
-
 char *ft_strjoin_path(char *str1, char *str2)
 {
 	char *str;

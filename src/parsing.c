@@ -25,7 +25,7 @@ void	parsing_name_all(t_env *env
 		queue_push(env->qt, queue_init_one((void*)(dptr->d_name)
 			,ft_strlen(dptr->d_name)));
 	}
-	(*sx)(env->qt, &ft_strcmp_Mm);
+	(*sx)(env->qt, &ft_strcmp_reverse);
 	ERROR_CHECK((!closedir(dir)));
 }
 
@@ -44,7 +44,7 @@ void	parsing_name_simple(t_env *env
 			queue_push(env->qt, queue_init_one((void*)n, ft_strlen(n)));
 		free(n);
 	}
-	(*sx)(env->qt, &ft_strcmp_Mm);
+	(*sx)(env->qt, &ft_strcmp_alphabet);
 	ERROR_CHECK((!closedir(dir)));
 }
 
@@ -67,7 +67,7 @@ int ft_aR(const char *name, t_queue **qt
 		n = (const char*)dptr->d_name;
 		queue_push(qt_local, queue_init_one((char*)n, ft_strlen((char*)n)));
 	}
-	(*sx)(qt_local, &ft_strcmp_Mm);
+	(*sx)(qt_local, &ft_strcmp_alphabet);
 	queue_display(*qt_local);
 	while (!queue_is_empty(*qt_local))
 	{
@@ -103,7 +103,7 @@ int ft_R(const char *name, t_queue **qt
 		if (!isHidden_sp(n))
 			queue_push(qt_local, queue_init_one((char*)n, ft_strlen((char*)n)));
 	}
-	(*sx)(qt_local, &ft_strcmp_Mm);
+	(*sx)(qt_local, &ft_strcmp_alphabet);
 	queue_display(*qt_local);
 	while (!queue_is_empty(*qt_local))
 	{

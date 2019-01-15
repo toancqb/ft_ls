@@ -67,7 +67,8 @@ void	display_st(t_queue *st);
 void	display_simple(t_env *env);
 void	display_aR(t_env *env);
 
-int		ft_strcmp_Mm(char *str1, char *str2);
+int		ft_strcmp_alphabet(char *str1, char *str2);
+int		ft_strcmp_reverse(char *s1, char *s2);
 void	sorting(t_queue **st, int (*f_sort)(char*,char*));
 
 int isDir(const char *path);
