@@ -19,11 +19,14 @@
 # include <sys/types.h>
 # include <sys/xattr.h>
 # include <pwd.h>
+#include <errno.h> //
 //# include <uuid/uuid.h>
 # include <time.h>
-# include <stdio.h>
+# include <stdio.h> //
 # include "../libft/libft.h"
+# include "../queue/ft_queue_lib.h"
 # define ERROR_CHECK(x) if (!x) { perror("Can't process"); exit(0);}
+# define PATH_LEN_MAX 1024
 
 typedef unsigned char u_char;
 
@@ -39,48 +42,45 @@ typedef struct s_opt
 typedef struct s_env
 {
 	const char *path;
-	t_list **st;
-	//u_char isf;
-	//
-
+	t_queue **qt;
 	//
 } t_env;
 
 void	ft_ls(const char *path);
 
 void	parsing_name(t_env *env, void (*f_parse)(t_env*
-		, void (*sx)(t_list**, int (*ft_strcmp_Mm)(char*,char*))));
+		, void (*sx)(t_queue**, int (*ft_strcmp_Mm)(char*,char*))));
 
 void	parsing_name_simple(t_env *env
-	, void (*sx)(t_list**, int (*ft_strcmp_Mm)(char*,char*)));
+	, void (*sx)(t_queue**, int (*ft_strcmp_Mm)(char*,char*)));
 
 void	parsing_name_all(t_env *env
-	, void (*sx)(t_list**, int (*ft_strcmp_Mm)(char*,char*)));
+	, void (*sx)(t_queue**, int (*ft_strcmp_Mm)(char*,char*)));
 
 void	parsing_name_aR(t_env *env
-	, void (*sx)(t_list**, int (*ft_strcmp_Mm)(char*,char*)));
+	, void (*sx)(t_queue**, int (*ft_strcmp_Mm)(char*,char*)));
 
-void	display_st(t_list *st);
+void	display_st(t_queue *st);
 void	display_simple(t_env *env);
 void	display_aR(t_env *env);
 int		ft_strcmp_Mm(char *str1, char *str2);
-void	sorting(t_list **st, int (*f_sort)(char*,char*));
+void	sorting(t_queue **st, int (*f_sort)(char*,char*));
 int isDir(const char *path);
 int isDir2(const char *path);
 int isHidden(const char *path);
 int	isHidden_pwd(const char *path);
 
-void	ft_lst_add_lst(t_list **st, t_list **tmp);
-char *ft_strjoin_path(char *str1, char *str2);
+int ft_strjoin_npath(char path[], int len_max, char *name, char *pop);
+
 void	ft_putnstr(char *str, int len);
-void	error_fix_tmp(t_list **t);
+
 void	display_simple2(t_env *env);
-t_list *ft_queue_init_str(char *str, int str_len);
+t_queue *ft_queue_init_str(char *str, int str_len);
 int	isHidden_sp(const char *path);
 //
 //
-//	sort_ls(t_list **st, &sort)
-//void display_ls(t_list **st, void (*f_pr_simple)(t_list**));
-//	ft_queue_del(t_list **st);
+//	sort_ls(t_queue **st, &sort)
+//void display_ls(t_queue **st, void (*f_pr_simple)(t_queue**));
+//	ft_queue_del(t_queue **st);
 
 #endif

@@ -21,16 +21,16 @@ char	*queue_pop(t_queue **qt)
     return (NULL);
   if ((*qt)->next == NULL)
   {
-    tmp = ft_strdup((*qt)->str);
+    tmp = ft_strdup((*qt)->content);
     queue_clr_one(qt);
     *qt = NULL;
   }
   else
   {
     q = *qt;
-    tmp = ft_strdup(q->str);
+    tmp = ft_strdup(q->content);
     *qt = (*qt)->next;
-    //queue_clr_one(&q);
+    queue_clr_one(&q);
   }
   return (tmp);
 }

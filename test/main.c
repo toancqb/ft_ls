@@ -1,5 +1,8 @@
 #include "../includes/ft_ls_lib.h"
 #include "../queue/ft_queue_lib.h"
+#include <errno.h>
+#include <string.h>
+#define PATH_LEN_MAX 1024
 
 void newln(void)
 {
@@ -9,80 +12,81 @@ void newln(void)
 
 int ft_test1(const char *name)
 {/*
-	* FIXED .dfefewf ..dfglkfghkf
+	*
 	* CHECK PERMISSION AND IGNORE
-	*	GOOD LUCK!
+	*	PROBLEM IS FT_STRJOIN_PATH <-------- REPLACED WITH SNPRINTF
 	*/
-	DIR *dir = NULL;
-	struct dirent *dptr = NULL;
-	char *n,*m;
+	DIR *dir;
+	struct dirent *dptr;
+	const char *n;
+	char *m;
+	char path[PATH_LEN_MAX];
 	t_queue **qt;
 
-	if (!isDir(name))
-		return (0);
 	qt = queue_init_root();
 	ERROR_CHECK((dir = opendir(name)));
 	ft_putstr(name); ft_putstr(":\n");
 	while ((dptr = readdir(dir)) != NULL)
 	{
-		n = ft_strdup(dptr->d_name);
-		queue_push(qt, queue_init_one(n, ft_strlen(n)));
-		free(n);
+		n = dptr->d_name;
+		queue_push(qt, queue_init_one((char*)n, ft_strlen((char*)n)));
 	}
 	queue_display(*qt);
 	while (!queue_is_empty(*qt))
 	{
 		m = queue_pop(qt);
-		//ft_putstr("__CPOP "); ft_putstr(m); ft_putstr("__\n");
-		n = ft_strjoin_path((char*)name, m);
-		//ft_putstr("__CHECK "); ft_putstr(n); ft_putstr("__\n");
-		if (isDir(n) && !isHidden_pwd(n))
+		//n = ft_strjoin_path((char*)name, m);
+		snprintf (path, PATH_LEN_MAX, "%s/%s", name, m);
+		if (isDir(path) && !isHidden_pwd(path))
 		{
-			//ft_putstr("\n"); <----------- PROBLEM IS HERE!!!!!!!!!
-			//ft_putstr("__POP "); ft_putstr(n); ft_putstr("__\n");
-
-			//newln((const char*)n);
-			ft_test1((const char*)m);
+			ft_test1(path);
 		}
-		free(n);
 	}
 	queue_clr_all(qt);
 	ERROR_CHECK(!(closedir(dir)));
 	return (1);
 }
 
-int ft_test2(const char *name)
+void ft_test2(const char *name)
 {/*
 	* I try to make this func as simple as possible
 	* SOMEHOW it doesnt work well with strings ???
 	*/
-	DIR *dir = NULL;
-	struct dirent *dptr = NULL;
+	DIR *dir;
+	struct dirent *dptr;
 	const char *n;
-	char *m;
+	char path[1024];
+	//char *m;
 
-	if (!isDir(name))
-		return (0);
 	ERROR_CHECK((dir = opendir(name)));
-	ft_putstr(name); ft_putstr(":\n");
+
+	//ft_putstr(name); ft_putstr(":\n");
+	printf("%s:\n", name);
 	while (1)
 	{
 		dptr = readdir(dir);
 		if (!dptr)
 			break ;
 		n = (const char*)dptr->d_name;
-		ft_putstr(n); ft_putstr("  ");
-		m = ft_strjoin_path((char*)name, (char*)n);
-		if ((dptr->d_type & DT_DIR) && (strcmp (n, "..") != 0 &&
-				strcmp (n, ".") != 0))
+		//ft_putstr(n); ft_putstr("  ");
+		printf("%s  ", n);
+		//m = ft_strjoin_path((char*)name, (char*)n);
+		if ((dptr->d_type & DT_DIR))
 		{
-			newln();
-			ft_test2((const char*)m);
+		if (strcmp (n, "..") != 0 && strcmp (n, ".") != 0)
+				{
+					//snprintf (path, 1024,"%s/%s", name, n);
+
+			ft_test2(path);
 		}
-		//free(m);
 	}
-	ERROR_CHECK(!(closedir(dir)));
-	return (1);
+	}
+	//printf("\n");
+	//ERROR_CHECK(!(closedir(dir)));
+	if (closedir (dir)) {
+			fprintf (stderr, "Could not close\n");
+			exit (EXIT_FAILURE);
+	}
 }
 
 void ft_test_queue()
@@ -107,11 +111,10 @@ void ft_test_queue()
 
 }
 
-
-
 int main(int argc, char *argv[])
 {
-	ft_test2(argv[1]);
+	ft_test1(argv[1]);
+
 	//ft_test_queue();
 	return (0);
 }

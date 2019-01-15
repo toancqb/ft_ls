@@ -12,6 +12,40 @@
 
 #include "../includes/ft_ls_lib.h"
 
+int ft_strjoin_npath(char path[], int len_max, char *name, char *pop)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < len_max && name[i] != '\0')
+	{
+		path[i] = name[i];
+		i++;
+	}
+	if (i >= len_max)
+	{
+		path[i - 1] = '\0';
+		return (0);
+	}
+	path[i] = '/';
+	i++;
+	j = 0;
+	while (i < len_max && pop[j] != '\0')
+	{
+		path[i] = pop[j];
+		i++;
+		j++;
+	}
+	if (i >= len_max)
+	{
+		path[i - 1] = '\0';
+		return (0);
+	}
+	path[i] = '\0';
+	return (1);
+}
+
 int isDir(const char *path)
 {
 	struct stat statbuf;
@@ -125,8 +159,8 @@ char *ft_strjoin_path(char *str1, char *str2)
 	int	i;
 	int	j;
 
-	str = (char*)malloc(sizeof(char) * (ft_strlen(str1) + ft_strlen(str2)));
-	str[ft_strlen(str1) + ft_strlen(str2)] = '\0';
+	str = (char*)malloc(sizeof(char) * (ft_strlen(str1) + ft_strlen(str2) - 1));
+	str[ft_strlen(str1) + ft_strlen(str2) - 1] = '\0';
 	i = 0;
 	while (str1[i] != '\0')
 	{

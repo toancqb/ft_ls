@@ -12,47 +12,36 @@
 
 #include "../includes/ft_ls_lib.h"
 
-void	swap_alphabet(t_list **a, t_list **b)
+static void	swap_lst(t_queue **a, t_queue **b)
 {
-	t_list *tmp;
-	//t_list *tmp2;
+	t_queue *tmp;
+	t_queue *tmp2;
 
-	/*tmp = (t_list*)malloc(sizeof(t_list));
-	tmp->content       = (*a)->content;
-	tmp->content_size  = (*a)->content_size;
-
+	tmp2 = *a;
+	tmp = queue_init_one((*a)->content, (*a)->len_max);
 	(*a)->content      = (*b)->content;
-	(*a)->content_size = (*b)->content_size;
+	(*a)->len_max 		 = (*b)->len_max;
 
 	(*b)->content      = tmp->content;
-	(*b)->content_size = tmp->content_size;*/
-	//tmp2 = *a;
-	tmp = ft_queue_init_elem((*a)->content, (*a)->content_size);
-	(*a)->content      = (*b)->content;
-	(*a)->content_size = (*b)->content_size;
-
-	(*b)->content      = tmp->content;
-	(*b)->content_size = tmp->content_size;
-	//free(tmp2->content);
-	//free(tmp2);
+	(*b)->len_max 		 = tmp->len_max;
+	free(tmp2->content);
 }
 
-void	sorting(t_list **st, int (*f_sort)(char*,char*))
+void	sorting(t_queue **qt, int (*f_sort)(char*,char*))
 {
-	t_list *tmp_i;
-	t_list *tmp_j;
+	t_queue *tmp_i;
+	t_queue *tmp_j;
 
-	//tmp_i = (t_list*)malloc(sizeof(t_list));
-	if (st && *st)
+	if (qt && *qt)
 	{
-		tmp_i = *st;
+		tmp_i = *qt;
 		while (tmp_i != NULL)
 		{
 			tmp_j = tmp_i->next;
 			while (tmp_j != NULL)
 			{
 				if ((*f_sort)(tmp_i->content, tmp_j->content) > 0)
-					swap_alphabet(&tmp_i, &tmp_j);
+					swap_lst(&tmp_i, &tmp_j);
 				tmp_j = tmp_j->next;
 			}
 			tmp_i = tmp_i->next;

@@ -13,7 +13,7 @@
 #include "../includes/ft_ls_lib.h"
 
 void	parsing_name_all(t_env *env
-	, void (*sx)(t_list**, int (*ft_strcmp_Mm)(char*,char*)))
+	, void (*sx)(t_queue**, int (*ft_strcmp_Mm)(char*,char*)))
 {
 	DIR *dir = NULL;
 	struct dirent *dptr = NULL;
@@ -22,15 +22,15 @@ void	parsing_name_all(t_env *env
 	while((dptr = readdir(dir)) != NULL)
 	{
 		//ft_putstr(dptr->d_name); ft_putstr(" > ");
-		ft_queue_push(env->st, ft_queue_init_elem((void*)(dptr->d_name)
+		queue_push(env->qt, queue_init_one((void*)(dptr->d_name)
 			,ft_strlen(dptr->d_name)));
 	}
-	(*sx)(env->st, &ft_strcmp_Mm);
+	(*sx)(env->qt, &ft_strcmp_Mm);
 	ERROR_CHECK((!closedir(dir)));
 }
 
 void	parsing_name_simple(t_env *env
-	, void (*sx)(t_list**, int (*ft_strcmp_Mm)(char*,char*)))
+	, void (*sx)(t_queue**, int (*ft_strcmp_Mm)(char*,char*)))
 {
 	DIR *dir;
 	struct dirent *dptr;
@@ -41,102 +41,58 @@ void	parsing_name_simple(t_env *env
 	{
 		n = ft_strdup(dptr->d_name);
 		if (!isHidden_sp(n))
-			ft_queue_push(env->st, ft_queue_init_elem((void*)n, ft_strlen(n)));
+			queue_push(env->qt, queue_init_one((void*)n, ft_strlen(n)));
 		free(n);
 	}
-	(*sx)(env->st, &ft_strcmp_Mm);
+	(*sx)(env->qt, &ft_strcmp_Mm);
 	ERROR_CHECK((!closedir(dir)));
 }
 
-int ft_R(const char *name, t_list **st
-, void (*sx)(t_list**, int (*ft_strcmp_Mm)(char*,char*))) //++
+int ft_R(const char *name, t_queue **qt
+, void (*sx)(t_queue**, int (*ft_strcmp_Mm)(char*,char*))) //++
 {
-	/*
-	 * Somehow algo doesnt work
-	 * Error in t_list : "..zw"instead of ".." !!!!!!!!!!!!!
-	 * New funcs: ft_strjoin_path (test ok) isHidden_pwd (test ok)
-	 * Funcs need to be reviewed: swap strlen of t_list content
-	 */
 	DIR				*dir;
 	struct dirent	*dptr;
 	const char		*n;
-	char			*m;
-	t_list			*t;
+	char			path[PATH_LEN_MAX];
+	t_queue			**qt_local;
 
 	if (!isDir(name))
 		return (0);
-	t = NULL;
+	qt_local = queue_init_root();
 	ERROR_CHECK((dir = opendir(name)));
 	ft_putstr(name); ft_putstr(":\n");
 	while ((dptr = readdir(dir)) != NULL)
 	{
 		n = (const char*)dptr->d_name;
-		ft_queue_push(&t, ft_queue_init_elem(n, ft_strlen(n)));
-		//free(n);
+		queue_push(qt_local, queue_init_one((char*)n, ft_strlen((char*)n)));
 	}
-	(*sx)(&t, &ft_strcmp_Mm);
-	//error_fix_tmp(&t);
-	display_st(t);
-	while (!ft_queue_is_empty(t))
+	(*sx)(qt_local, &ft_strcmp_Mm);
+	queue_display(*qt_local);
+	while (!queue_is_empty(*qt_local))
 	{
-		m = ft_strjoin_path((char*)name, ft_queue_pop(&t));
-		if (isDir((const char*)m) && !isHidden_pwd((const char*)m))
+		//snprintf(path, PATH_LEN_MAX, "%s/%s", name, queue_pop(qt));
+		ft_strjoin_npath(path, PATH_LEN_MAX, (char*)name, queue_pop(qt_local));
+		if (isDir(path) && !isHidden_pwd(path))
 		{
-			ft_putstr("\n"); fflush(stdin);
-			ft_R((const char*)m, st, sx);
+			ft_putstr("\n");
+			ft_R(path, qt, sx);
 		}
-		//free(m);
 	}
-	//ft_lstdel(&t);  //does not WORK !!!
+	queue_clr_all(qt_local);
 	ERROR_CHECK(!(closedir(dir)));
 	return (1);
 }
 
-/*t_list **ft_ls_a(const char *name
-, void (*sx)(t_list**, int (*ft_strcmp_Mm)(char*,char*))) //++
-{
-	DIR *dir;
-	struct dirent *dptr;
-	char *n;
-	t_list *tmp;
-
-	if (!isDir(name))
-		return (0);
-	ERROR_CHECK((dir = opendir(name)));
-	ft_putstr("<<<");ft_putstr(name); ft_putstr(">>>:\n");
-	while ((dptr = readdir(dir)) != NULL)
-	{
-		n = ft_strdup(dptr->d_name);
-		ft_queue_push(&tmp, ft_queue_init_elem(n, ft_strlen(n)));
-		free(n);
-	}
-	(*sx)(&tmp, &ft_strcmp_Mm);
-	//ft_lst_add_lst(st_tmp, &tmp);
-	ERROR_CHECK(!(closedir(dir)));
-	return (&tmp);
-}
-
-int ft_aR(const char *name, t_list **st
-, void (*sx)(t_list**, int (*ft_strcmp_Mm)(char*,char*)))
-{
-	DIR *dir;
-	struct dirent *dptr;
-	char *n;
-
-	if (!isDir(name))
-		return (0);
-	ERROR_CHECK((dir = opendir(name)));
-}*/
-
 void	parsing_name_aR(t_env *env
-	, void (*sx)(t_list**, int (*ft_strcmp_Mm)(char*,char*))) //++
+	, void (*sx)(t_queue**, int (*ft_strcmp_Mm)(char*,char*))) //++
 {
-	ft_R(env->path, env->st, sx);
+	ft_R(env->path, env->qt, sx);
 }
 
 void	parsing_name(t_env *env
 	, void (*f_parse)(t_env *env
-		, void (*sx)(t_list**, int (*ft_strcmp_Mm)(char*,char*))))
+		, void (*sx)(t_queue**, int (*ft_strcmp_Mm)(char*,char*))))
 {
 	(*f_parse)(env, &sorting);
 }

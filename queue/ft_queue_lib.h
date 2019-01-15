@@ -17,8 +17,8 @@
 
 typedef struct	s_queue
 {
-  char				*str;
-  int				len_max;
+  char				*content;
+  int         len_max;
   struct s_queue	*next;
 }				t_queue;
 

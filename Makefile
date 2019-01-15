@@ -6,7 +6,7 @@
 #    By: qtran <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/03 21:51:03 by qtran             #+#    #+#              #
-#    Updated: 2018/12/18 20:17:18 by qtran            ###   ########.fr        #
+#    Updated: 2019/01/15 18:08:58 by qtran            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ BUILD_OBJ = $(addprefix $BUILD_DIR), $(OBJ))
 #########################
 
 all:
-	$(CC) $(CFLAGS) $(SRC_NAMES) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) queue/*.c  $(SRC_NAMES) $(LIBFT) -o $(NAME)
 
 clean:
 	rm -rf $(OBJ)

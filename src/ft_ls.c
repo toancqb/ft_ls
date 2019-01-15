@@ -16,25 +16,15 @@
 
 void	ft_ls(const char *path)
 {
-	//t_list	**st;
 	t_env	*env;
 
 	env = (t_env*)malloc(sizeof(t_env));
 	env->path = path;
-	//env->st = (t_list**)malloc(sizeof(t_list*));
-	env->st = (t_list**)malloc(sizeof(t_list*));
-	*(env->st) = NULL;
+	env->qt = queue_init_root();
+
 	parsing_name(env, &parsing_name_aR);
-	display_simple2(env);
+	//queue_display(*(env->qt));
 
-	//ft_lstdel(env->st);
-	//free(env);
+	queue_clr_all(env->qt);
+	free(env);
 }
-
-/*void	ls_recursive(const char *path)
-{
-	t_list	**st;
-
-	ft_queue_push(st, ft_queue_init_elem((void*)path, 0));
-
-}*/

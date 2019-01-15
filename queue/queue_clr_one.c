@@ -19,7 +19,7 @@ void queue_clr_one(t_queue **q)
   if (q)
   {
     tmp = *q;
-    free(tmp->str);
+    free(tmp->content);
     free(tmp);
   }
 }
