@@ -60,27 +60,24 @@ void	parsing_name_all(t_env *env
 void	parsing_name_aR(t_env *env
 	, void (*sx)(t_queue**, int (*ft_strcmp_Mm)(char*,char*)));
 
+void	parsing_name_R(t_env *env
+		, void (*sx)(t_queue**, int (*ft_strcmp_Mm)(char*,char*)));
+
 void	display_st(t_queue *st);
 void	display_simple(t_env *env);
 void	display_aR(t_env *env);
+
 int		ft_strcmp_Mm(char *str1, char *str2);
 void	sorting(t_queue **st, int (*f_sort)(char*,char*));
+
 int isDir(const char *path);
 int isDir2(const char *path);
 int isHidden(const char *path);
 int	isHidden_pwd(const char *path);
+int	isHidden_sp(const char *path);
 
 int ft_strjoin_npath(char path[], int len_max, char *name, char *pop);
 
 void	ft_putnstr(char *str, int len);
-
-void	display_simple2(t_env *env);
-t_queue *ft_queue_init_str(char *str, int str_len);
-int	isHidden_sp(const char *path);
-//
-//
-//	sort_ls(t_queue **st, &sort)
-//void display_ls(t_queue **st, void (*f_pr_simple)(t_queue**));
-//	ft_queue_del(t_queue **st);
 
 #endif

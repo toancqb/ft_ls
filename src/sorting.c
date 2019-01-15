@@ -15,16 +15,16 @@
 static void	swap_lst(t_queue **a, t_queue **b)
 {
 	t_queue *tmp;
-	t_queue *tmp2;
+	//t_queue *tmp2;
 
-	tmp2 = *a;
+//	tmp2 = *a;
 	tmp = queue_init_one((*a)->content, (*a)->len_max);
 	(*a)->content      = (*b)->content;
 	(*a)->len_max 		 = (*b)->len_max;
 
 	(*b)->content      = tmp->content;
 	(*b)->len_max 		 = tmp->len_max;
-	free(tmp2->content);
+//	free(tmp2->content);
 }
 
 void	sorting(t_queue **qt, int (*f_sort)(char*,char*))

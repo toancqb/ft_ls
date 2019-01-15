@@ -22,7 +22,7 @@ void	ft_ls(const char *path)
 	env->path = path;
 	env->qt = queue_init_root();
 
-	parsing_name(env, &parsing_name_aR);
+	parsing_name(env, &parsing_name_R);
 	//queue_display(*(env->qt));
 
 	queue_clr_all(env->qt);
