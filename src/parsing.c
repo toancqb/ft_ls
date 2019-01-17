@@ -15,17 +15,18 @@
 void	parsing_name_all(t_env *env
 	, void (*sx)(t_queue**, int (*ft_strcmp_Mm)(char*,char*)))
 {
-	DIR *dir = NULL;
-	struct dirent *dptr = NULL;
+	DIR *dir;
+	struct dirent *dptr;
+	const char *n;
 
 	ERROR_CHECK((dir = opendir(env->path)));
 	while((dptr = readdir(dir)) != NULL)
 	{
-		//ft_putstr(dptr->d_name); ft_putstr(" > ");
-		queue_push(env->qt, queue_init_one((void*)(dptr->d_name)
-			,ft_strlen(dptr->d_name)));
+		n = ft_strdup(dptr->d_name);
+		queue_push(env->qt, queue_init_one((char*)n, ft_strlen(n)));
+		free(n);
 	}
-	(*sx)(env->qt, &ft_strcmp_reverse);
+	(*sx)(env->qt, &ft_strcmp_alphabet);
 	ERROR_CHECK((!closedir(dir)));
 }
 
@@ -34,14 +35,14 @@ void	parsing_name_simple(t_env *env
 {
 	DIR *dir;
 	struct dirent *dptr;
-	char *n;
+	const char *n;
 
 	ERROR_CHECK((dir = opendir(env->path)));
 	while((dptr = readdir(dir)) != NULL)
 	{
 		n = ft_strdup(dptr->d_name);
 		if (!isHidden_sp(n))
-			queue_push(env->qt, queue_init_one((void*)n, ft_strlen(n)));
+			queue_push(env->qt, queue_init_one((char*)n, ft_strlen(n)));
 		free(n);
 	}
 	(*sx)(env->qt, &ft_strcmp_alphabet);

@@ -28,15 +28,14 @@
 # define ERROR_CHECK(x) if (!x) { perror("Can't process"); exit(0);}
 # define PATH_LEN_MAX 1024
 
-typedef unsigned char u_char;
-
 typedef struct s_opt
 {
-	u_char	l;
-	u_char	R;
-	u_char	a;
-	u_char	r;
-	u_char	t;
+	int	l; // 1
+	int	R; // 2
+	int	a; // 4
+	int	r; // 8
+	int	t; // 16
+	//int flag;
 } t_opt;
 
 typedef struct s_env
@@ -46,7 +45,7 @@ typedef struct s_env
 	//
 } t_env;
 
-void	ft_ls(const char *path);
+//void	ft_ls(const char *path);
 
 void	parsing_name(t_env *env, void (*f_parse)(t_env*
 		, void (*sx)(t_queue**, int (*ft_strcmp_Mm)(char*,char*))));
@@ -63,12 +62,15 @@ void	parsing_name_aR(t_env *env
 void	parsing_name_R(t_env *env
 		, void (*sx)(t_queue**, int (*ft_strcmp_Mm)(char*,char*)));
 
+void	ft_assign_opt_path(int argc, char **argv, t_opt *op, t_queue **target);
+
 void	display_st(t_queue *st);
 void	display_simple(t_env *env);
 void	display_aR(t_env *env);
 
 int		ft_strcmp_alphabet(char *str1, char *str2);
 int		ft_strcmp_reverse(char *s1, char *s2);
+int		ft_strcmp_modification_time(char *s1, char *s2); // <-------
 void	sorting(t_queue **st, int (*f_sort)(char*,char*));
 
 int isDir(const char *path);
