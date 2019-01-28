@@ -12,43 +12,6 @@
 
 #include "../includes/ft_ls_lib.h"
 
-void	parsing_name_all(t_env *env
-	, void (*sx)(t_queue**, int (*ft_strcmp_Mm)(char*,char*)))
-{
-	DIR *dir;
-	struct dirent *dptr;
-	const char *n;
-
-	ERROR_CHECK((dir = opendir(env->path)));
-	while((dptr = readdir(dir)) != NULL)
-	{
-		n = ft_strdup(dptr->d_name);
-		queue_push(env->qt, queue_init_one((char*)n, ft_strlen(n)));
-		free(n);
-	}
-	(*sx)(env->qt, &ft_strcmp_alphabet);
-	ERROR_CHECK((!closedir(dir)));
-}
-
-void	parsing_name_simple(t_env *env
-	, void (*sx)(t_queue**, int (*ft_strcmp_Mm)(char*,char*)))
-{
-	DIR *dir;
-	struct dirent *dptr;
-	const char *n;
-
-	ERROR_CHECK((dir = opendir(env->path)));
-	while((dptr = readdir(dir)) != NULL)
-	{
-		n = ft_strdup(dptr->d_name);
-		if (!isHidden_sp(n))
-			queue_push(env->qt, queue_init_one((char*)n, ft_strlen(n)));
-		free(n);
-	}
-	(*sx)(env->qt, &ft_strcmp_alphabet);
-	ERROR_CHECK((!closedir(dir)));
-}
-
 int ft_aR(const char *name, t_queue **qt
 , void (*sx)(t_queue**, int (*ft_strcmp_Mm)(char*,char*))) //++
 {
@@ -118,6 +81,43 @@ int ft_R(const char *name, t_queue **qt
 	queue_clr_all(qt_local);
 	ERROR_CHECK(!(closedir(dir)));
 	return (1);
+}
+
+void	parsing_name_all(t_env *env
+	, void (*sx)(t_queue**, int (*ft_strcmp_Mm)(char*,char*)))
+{
+	DIR *dir;
+	struct dirent *dptr;
+	const char *n;
+
+	ERROR_CHECK((dir = opendir(env->path)));
+	while((dptr = readdir(dir)) != NULL)
+	{
+		n = ft_strdup(dptr->d_name);
+		queue_push(env->qt, queue_init_one((char*)n, ft_strlen(n)));
+		free(n);
+	}
+	(*sx)(env->qt, &ft_strcmp_alphabet);
+	ERROR_CHECK((!closedir(dir)));
+}
+
+void	parsing_name_simple(t_env *env
+	, void (*sx)(t_queue**, int (*ft_strcmp_Mm)(char*,char*)))
+{
+	DIR *dir;
+	struct dirent *dptr;
+	const char *n;
+
+	ERROR_CHECK((dir = opendir(env->path)));
+	while((dptr = readdir(dir)) != NULL)
+	{
+		n = ft_strdup(dptr->d_name);
+		if (!isHidden_sp(n))
+			queue_push(env->qt, queue_init_one((char*)n, ft_strlen(n)));
+		free(n);
+	}
+	(*sx)(env->qt, &ft_strcmp_alphabet);
+	ERROR_CHECK((!closedir(dir)));
 }
 
 void	parsing_name_aR(t_env *env

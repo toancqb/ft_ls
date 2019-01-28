@@ -47,6 +47,8 @@ typedef struct s_env
 
 //void	ft_ls(const char *path);
 
+void  ft_longformat(const char *path); //
+
 void	parsing_name(t_env *env, void (*f_parse)(t_env*
 		, void (*sx)(t_queue**, int (*ft_strcmp_Mm)(char*,char*))));
 

@@ -42,3 +42,4 @@ int ft_R_origin(const char *name, t_list **st
 	ERROR_CHECK(!(closedir(dir)));
 	return (1);
 }
+hihi

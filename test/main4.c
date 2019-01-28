@@ -7,20 +7,16 @@
 #include <time.h>
 #include <pwd.h>
 #include <grp.h>
-int main(int argc, char **argv)
+
+void  ft_longformat(const char *path)
 {
-  struct passwd *pw;
-  struct group *gp;
-  DIR *mydir;
-  char *c;
   int i;
-  struct dirent *myfile;
-  struct stat fileStat;
-  mydir=opendir(".");
-  stat(".",&fileStat); 
-  while((myfile=readdir(mydir))!=NULL)
-  {
-    stat(myfile->d_name,&fileStat);  
+  char *c;
+    struct passwd *pw;
+    struct group *gp;
+    struct stat fileStat;
+
+    stat(path,&fileStat);  
     printf( (S_ISDIR(fileStat.st_mode)) ? "d" : "-");
     printf( (fileStat.st_mode & S_IRUSR) ? "r" : "-");
     printf( (fileStat.st_mode & S_IWUSR) ? "w" : "-");
@@ -42,8 +38,21 @@ int main(int argc, char **argv)
     for(i=4;i<=15;i++)
       printf("%c",c[i]);
     printf(" ");
-    printf("%s\n",myfile->d_name);
+    printf("%s\n",path);
+}
+
+int main(int argc, char **argv)
+{
+  ft_longformat(argv[1]);
+  /*DIR *mydir;
+  struct dirent *myfile;
+  
+  mydir=opendir(argv[1]);
+ //stat(".",&fileStat); 
+  while((myfile=readdir(mydir))!=NULL)
+  {
+    ft_longformat((const char *)myfile->d_name);
   }
-  closedir(mydir);  
+  closedir(mydir);  */
   return 0;
 }

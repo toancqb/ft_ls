@@ -66,6 +66,7 @@ void	ft_assign_opt_path(int argc, char **argv, t_opt *op, t_queue **target)
 		{
 			tmp = ft_strdup(argv[i]);
 			queue_push(target, queue_init_one(tmp, ft_strlen(tmp)));
+			free(tmp);
 		}
 		i++;
 	}
