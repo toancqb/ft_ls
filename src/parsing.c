@@ -39,10 +39,11 @@ void	parsing_name_simple(t_env *env
 	while((dptr = readdir(dir)) != NULL)
 	{
 		if (!isHidden((const char*)dptr->d_name))
-		ft_queue_push(env->st, ft_queue_init_elem((void*)(dptr->d_name)
+			ft_queue_push(env->st, ft_queue_init_elem((void*)(dptr->d_name)
 			,ft_strlen(dptr->d_name)));
 	}
 	(*sx)(env->st, &ft_strcmp_Mm);
+	display_st(*(env->st));
 	ERROR_CHECK((!closedir(dir)));
 }
 
@@ -51,13 +52,13 @@ int ft_R(const char *name, t_list **st
 {
 	DIR				*dir;
 	struct dirent	*dptr;
-	static t_list			*tmp;
+	t_list			*tmp;
 	char			*n;
 	t_list			*t;
 
 	if (!isDir(name))
 		return (0);
-	t = NULL;
+	tmp = NULL; t = NULL;
 	ERROR_CHECK((dir = opendir(name)));
 	ft_putstr("<<<");ft_putstr(name); ft_putstr(">>>:\n");
 	while ((dptr = readdir(dir)) != NULL)
@@ -72,13 +73,15 @@ int ft_R(const char *name, t_list **st
 		free(n);
 	}
 	(*sx)(&t, &ft_strcmp_Mm);
-	display_st(t);
+	//display_st(t);
 	while (!ft_queue_is_empty(tmp))
 	{
-		ft_R(ft_queue_pop(&tmp), st, sx);
+		n = (char*)ft_queue_pop(&tmp);
+		ft_R(n, st, sx);
 	}
 //	ft_lstdel(&tmp);
 //	ft_lstdel(&t);  does not WORK !!!
+	display_st(t);
 	ERROR_CHECK(!(closedir(dir)));
 	return (0);
 }

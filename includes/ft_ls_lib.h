@@ -24,29 +24,22 @@
 # include <stdio.h>
 # include "../libft/libft.h"
 # define ERROR_CHECK(x) if (!x) { perror("Can't process"); exit(0);}
+# define OPT_l 1 << 1
+# define OPT_R 1 << 2
+# define OPT_a 1 << 3
+# define OPT_r 1 << 4
+# define OPT_t 1 << 5
 
 typedef unsigned char u_char;
-
-typedef struct s_opt
-{
-	u_char	l;
-	u_char	R;
-	u_char	a;
-	u_char	r;
-	u_char	t;
-} t_opt;
 
 typedef struct s_env
 {
 	const char *path;
 	t_list **st;
-	//u_char isf;
-	//
-
-	//
+	int option;
 } t_env;
 
-void	ft_ls(const char *path);
+void	ft_ls(int argc, char **argv);
 
 void	parsing_name(t_env *env, void (*f_parse)(t_env*
 		, void (*sx)(t_list**, int (*ft_strcmp_Mm)(char*,char*))));
